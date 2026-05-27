@@ -1,0 +1,524 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Cinzel+Decorative:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+  --blood: #8b0000;
+  --blood-bright: #cc0000;
+  --ash: #1a1a1a;
+  --ember: #2a0a0a;
+  --bone: #c9b99a;
+  --fog: #3d3030;
+  --shadow: #0d0808;
+  --pale: #e8ddd0;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--shadow);
+  color: var(--pale);
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.7;
+  min-height: 100vh;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='4' fill='%238b0000'/%3E%3C/svg%3E"), auto;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(80,0,0,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(50,0,0,0.2) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── NOISE TEXTURE OVERLAY ─── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── NAVIGATION ─── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(8,3,3,0.95);
+  border-bottom: 1px solid var(--blood);
+  backdrop-filter: blur(8px);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  box-shadow: 0 2px 30px rgba(139,0,0,0.4);
+}
+
+nav::before {
+  content: '☠';
+  font-size: 1.4rem;
+  color: var(--blood);
+  margin-right: 1.5rem;
+  animation: pulse-skull 3s ease-in-out infinite;
+}
+
+@keyframes pulse-skull {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+nav a {
+  display: inline-block;
+  color: var(--bone);
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.1rem 1rem;
+  transition: color 0.3s, background 0.3s;
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--blood-bright);
+  transition: width 0.3s;
+}
+
+nav a:hover {
+  color: #fff;
+  background: rgba(139,0,0,0.15);
+}
+
+nav a:hover::after { width: 60%; }
+
+/* ─── PAGE WRAPPER ─── */
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 2rem 5rem;
+}
+
+/* ─── HERO ─── */
+.hero {
+  text-align: center;
+  padding: 5rem 2rem 4rem;
+  position: relative;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--blood-bright);
+  margin-bottom: 1.5rem;
+  padding: 0.4rem 1.5rem;
+  border: 1px solid rgba(139,0,0,0.5);
+  animation: flicker 6s infinite;
+}
+
+@keyframes flicker {
+  0%, 95%, 100% { opacity: 1; }
+  96% { opacity: 0.4; }
+  97% { opacity: 1; }
+  98% { opacity: 0.2; }
+  99% { opacity: 0.9; }
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-shadow:
+    0 0 20px rgba(139,0,0,0.8),
+    0 0 60px rgba(139,0,0,0.4),
+    2px 2px 0 rgba(0,0,0,0.8);
+  margin-bottom: 1.5rem;
+  animation: title-breathe 4s ease-in-out infinite;
+}
+
+@keyframes title-breathe {
+  0%, 100% { text-shadow: 0 0 20px rgba(139,0,0,0.8), 0 0 60px rgba(139,0,0,0.4), 2px 2px 0 rgba(0,0,0,0.8); }
+  50% { text-shadow: 0 0 30px rgba(180,0,0,1), 0 0 80px rgba(139,0,0,0.6), 2px 2px 0 rgba(0,0,0,0.8); }
+}
+
+.hero-sub {
+  font-size: 1.2rem;
+  color: var(--bone);
+  font-style: italic;
+  max-width: 550px;
+  margin: 0 auto 2.5rem;
+}
+
+.blood-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem auto;
+  max-width: 400px;
+}
+
+.blood-divider::before,
+.blood-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--blood));
+}
+
+.blood-divider::after {
+  background: linear-gradient(to left, transparent, var(--blood));
+}
+
+.blood-divider span {
+  color: var(--blood-bright);
+  font-size: 1.2rem;
+}
+
+/* ─── SECTION HEADINGS ─── */
+h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  color: #fff;
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: var(--blood);
+}
+
+h3 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1rem;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+/* ─── CARDS GRID ─── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: var(--ember);
+  border: 1px solid rgba(139,0,0,0.3);
+  padding: 1.75rem;
+  position: relative;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(139,0,0,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--blood);
+  box-shadow: 0 10px 40px rgba(139,0,0,0.3), 0 0 1px var(--blood-bright);
+}
+
+.card-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 1rem;
+  filter: grayscale(30%);
+}
+
+.card p {
+  color: var(--bone);
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+.card-tag {
+  display: inline-block;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blood-bright);
+  border: 1px solid rgba(139,0,0,0.4);
+  padding: 0.2rem 0.6rem;
+  margin-top: 1rem;
+}
+
+/* ─── LIST ITEMS ─── */
+.horror-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.horror-list li {
+  background: var(--ember);
+  border: 1px solid rgba(139,0,0,0.2);
+  border-left: 3px solid var(--blood);
+  padding: 1rem 1.25rem;
+  font-size: 1.05rem;
+  color: var(--pale);
+  transition: background 0.3s, border-left-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.horror-list li:hover {
+  background: rgba(80,10,10,0.6);
+  border-left-color: var(--blood-bright);
+}
+
+.horror-list li::before {
+  content: '✦';
+  color: var(--blood-bright);
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+
+/* ─── CANALES ─── */
+.canal-card {
+  background: var(--ember);
+  border: 1px solid rgba(139,0,0,0.25);
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  transition: transform 0.3s, border-color 0.3s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.canal-card:hover {
+  transform: translateX(6px);
+  border-color: var(--blood);
+}
+
+.canal-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(139,0,0,0.3);
+  border: 1px solid var(--blood);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.canal-name { font-family: 'Cinzel Decorative', serif; font-size: 0.85rem; color: #fff; }
+.canal-desc { font-size: 0.9rem; color: var(--bone); margin-top: 0.2rem; }
+
+/* ─── RELATOS ─── */
+.relato-block {
+  background: var(--ember);
+  border: 1px solid rgba(139,0,0,0.25);
+  border-left: 4px solid var(--blood);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.relato-block::before {
+  content: '"';
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 5rem;
+  color: rgba(139,0,0,0.15);
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.relato-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.8rem;
+  color: var(--blood-bright);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.relato-text {
+  font-style: italic;
+  color: var(--pale);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── CHAT ─── */
+.chat-wrapper {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 1rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.chat-box {
+  background: var(--ember);
+  border: 1px solid rgba(139,0,0,0.3);
+  padding: 1.5rem;
+  min-height: 320px;
+  max-height: 420px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.chat-box::-webkit-scrollbar { width: 4px; }
+.chat-box::-webkit-scrollbar-track { background: var(--shadow); }
+.chat-box::-webkit-scrollbar-thumb { background: var(--blood); }
+
+.chat-msg {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.chat-msg .user {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--blood-bright);
+  text-transform: uppercase;
+}
+
+.chat-msg .text {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(139,0,0,0.2);
+  padding: 0.6rem 0.9rem;
+  border-left: 2px solid var(--blood);
+  color: var(--pale);
+  font-style: italic;
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.chat-input-row input {
+  flex: 1;
+  background: var(--ember);
+  border: 1px solid rgba(139,0,0,0.4);
+  color: var(--pale);
+  font-family: 'Crimson Text', serif;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.chat-input-row input::placeholder { color: rgba(201,185,154,0.4); font-style: italic; }
+.chat-input-row input:focus { border-color: var(--blood); }
+
+.btn {
+  background: var(--blood);
+  color: #fff;
+  border: none;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.15s;
+}
+
+.btn:hover { background: var(--blood-bright); }
+.btn:active { transform: scale(0.97); }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid rgba(139,0,0,0.3);
+  text-align: center;
+  padding: 2rem;
+  color: rgba(201,185,154,0.4);
+  font-size: 0.85rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── DRIP EFFECT ─── */
+.drip-bar {
+  height: 8px;
+  background: var(--blood);
+  position: relative;
+  overflow: visible;
+}
+
+.drip-bar::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 15%;
+  width: 6px;
+  height: 24px;
+  background: var(--blood);
+  border-radius: 0 0 50% 50%;
+  box-shadow: 80px 8px 0 var(--blood), 220px 4px 0 var(--blood), 380px 12px 0 var(--blood), 520px 6px 0 var(--blood), 700px 10px 0 var(--blood);
+}
+
+/* ─── UTILITY ─── */
+.section-label {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--blood-bright);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.flex-col { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.page-enter { animation: page-in 0.6s ease-out; }
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
